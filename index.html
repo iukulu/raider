@@ -5,7 +5,7 @@
   <meta name="description" content="raider">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="theme-color" content="#ff1a1a">
-  <meta property="og:title" content=" Raider">
+  <meta property="og:title" content="Raider">
   <meta property="og:description" content="Red & Black Edition">
   <meta property="og:site_name" content="">
   <meta property="og:image" content="https://i.imgur.com/63BHhQE.jpeg">
@@ -52,23 +52,29 @@
   <div class="card">
     <h2>RAIDER</h2>
     <form id="form">
-      <label>トークン</label>
-      <textarea id="tokens" rows="4" placeholder="カンマ / 改行 / スペースで区切る"></textarea>
+      <label>トークン（スペース or カンマ区切り）</label>
+      <textarea id="tokens" rows="1" placeholder="token1 token2 token3, token4 token5..."></textarea>
+
       <label>サーバーID</label>
       <input type="text" id="guildId" placeholder="123456789012345678">
+
       <label>チャンネルID</label>
       <textarea id="channelIds" rows="2" placeholder="カンマ / 改行 / スペースで区切る"></textarea>
       <button type="button" id="autoFillChannels" class="secondary">チャンネル自動取得</button>
+
       <label>メッセージ内容</label>
       <textarea id="message" rows="4" placeholder="送信するメッセージを入力"></textarea>
+
       <label class="checkbox-container">
         <input type="checkbox" id="randomize">
         <span>メッセージのランダマイズ</span>
       </label>
+
       <div class="row">
         <label>送信間隔 (秒)<input type="number" id="delay" min="0" step="0.1" value="0"></label>
         <label>送信上限 (回)<input type="number" id="limit" min="1" placeholder=""></label>
       </div>
+
       <details><summary>メンション設定</summary>
         <div class="detail-content">
           <label>メンションするユーザーID一覧</label>
@@ -76,6 +82,7 @@
           <button type="button" id="fetchMentions" class="secondary">メンション自動取得</button>
         </div>
       </details>
+
       <details><summary>投票設定</summary>
         <div class="detail-content">
           <label>投票タイトル<input type="text" id="pollTitle"></label>
@@ -83,22 +90,25 @@
           <textarea id="pollAnswers" rows="2"></textarea>
         </div>
       </details>
+
       <details><summary>メッセージ転送設定</summary>
         <div class="detail-content">
           <label>転送するメッセージURL</label>
           <input type="text" id="forwardMessageUrl" placeholder="https://discord.com/channels/...">
         </div>
       </details>
+
       <button id="submitBtn" type="submit" class="primary" disabled>RAID START</button>
     </form>
+
     <div class="button-container">
       <button id="stopSpam">即時停止</button>
       <button id="leaveBtn">全トークン退出</button>
     </div>
+
     <div id="log"></div>
   </div>
-  <script>
-    // 
-  </script>
+
+  <script src="script.js"></script>
 </body>
 </html>

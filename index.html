@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="description" content="raider">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#ff1a1a">
+  <meta property="og:title" content=" Raider">
+  <meta property="og:description" content="Red & Black Edition">
+  <meta property="og:site_name" content="">
+  <meta property="og:image" content="https://i.imgur.com/63BHhQE.jpeg">
+  <link rel="icon" type="image/png" href="https://i.imgur.com/63BHhQE.jpeg">
+  <title>Raider - Red Edition</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+  <style>
+    :root{--bg:#0f0f0f;--card:#1a1a1a;--accent:#ff1a1a;--accent-hover:#ff3333;--text:#ffffff;--text-muted:#aaaaaa;--input:#111111;--border:#333333}
+    ::-webkit-scrollbar{width:8px}::-webkit-scrollbar-track{background:var(--bg)}::-webkit-scrollbar-thumb{background:var(--accent);border-radius:4px}::-webkit-scrollbar-thumb:hover{background:var(--accent-hover)}
+    *{box-sizing:border-box}
+    body{font-family:'Inter',sans-serif;background:radial-gradient(circle at top left,#330000 0%,#000000 50%,#110000 100%);color:var(--text);margin:0;display:flex;justify-content:center;align-items:center;min-height:100vh;overflow:hidden;position:relative}
+    body::before{content:'';position:absolute;inset:0;background:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100"><rect width="100" height="100" fill="%23000000"/><path d="M0,50 Q25,30 50,50 T100,50 L100,100 L0,100 Z" fill="%23ff1a1a15"/></svg>') repeat;opacity:.1;pointer-events:none}
+    .card{background:var(--card);padding:32px;border-radius:16px;box-shadow:0 0 30px rgba(255,26,26,.4),0 0 60px rgba(255,26,26,.2),inset 0 0 20px rgba(255,26,26,.1);border:1px solid #333;width:100%;max-width:620px;position:relative;overflow:hidden;animation:g 4s infinite alternate;max-height:95vh;overflow-y:auto}
+    @keyframes g{0%{box-shadow:0 0 30px rgba(255,26,26,.4),0 0 60px rgba(255,26,26,.2)}100%{box-shadow:0 0 40px rgba(255,26,26,.6),0 0 80px rgba(255,26,26,.3)}}
+    h2{color:var(--accent);text-align:center;margin:0 0 28px;font-weight:800;font-size:28px;text-shadow:0 0 10px rgba(255,26,26,.8);letter-spacing:2px}
+    label{display:block;margin-top:20px;font-size:14px;color:#ff6666}
+    input[type="text"],textarea{width:100%;padding:12px;margin-top:8px;border-radius:8px;border:1px solid var(--border);background:var(--input);color:#fff;font-family:'Courier New',monospace;transition:all .3s}
+    input[type="text"]:focus,textarea:focus{outline:none;border-color:var(--accent);box-shadow:0 0 10px rgba(255,26,26,.5)}
+    input[type="number"]{width:100px;padding:8px;background:var(--input);color:#fff;border:1px solid var(--border);border-radius:6px}
+    .row{display:flex;gap:16px;align-items:center;flex-wrap:wrap}
+    .checkbox-container{display:flex;align-items:center;gap:10px;margin-top:12px;cursor:pointer;color:#ff6666}
+    .checkbox-container input{appearance:none;width:40px;height:20px;background:#333;border-radius:20px;position:relative;transition:.3s}
+    .checkbox-container input::before{content:'';position:absolute;width:16px;height:16px;border-radius:50%;background:#666;top:2px;left:2px;transition:.3s}
+    .checkbox-container input:checked{background:var(--accent);box-shadow:0 0 10px var(--accent)}
+    .checkbox-container input:checked::before{transform:translateX(20px);background:#fff}
+    button{margin-top:20px;padding:14px 20px;border:none;border-radius:10px;font-weight:600;cursor:pointer;transition:all .3s;position:relative;overflow:hidden}
+    button.primary{width:100%;background:linear-gradient(135deg,#ff1a1a,#cc0000);color:#fff;font-size:18px;letter-spacing:1px;box-shadow:0 5px 15px rgba(255,26,26,.5)}
+    button.primary:hover{background:linear-gradient(135deg,#ff3333,#ff1a1a);transform:translateY(-2px);box-shadow:0 10px 25px rgba(255,26,26,.7)}
+    button.primary.loading{opacity:.8;cursor:not-allowed}
+    button.secondary{background:#2a2a2a;color:#ff6666;border:1px solid #444}
+    button.secondary:hover{background:var(--accent);color:#fff;border-color:var(--accent)}
+    #stopSpam,#leaveBtn{width:48%;background:#2a0000;color:#ff6666;border:1px solid #600}
+    #stopSpam:hover,#leaveBtn:hover{background:#ff1a1a;color:#fff;transform:translateY(-2px)}
+    .button-container{display:flex;gap:10px;justify-content:center}
+    details{margin-top:20px}
+    summary{color:#ff6666;cursor:pointer;font-weight:600;padding:10px 0;list-style:none}
+    summary::before{content:"> ";color:var(--accent);font-weight:bold}
+    details[open] summary::before{content:"v "}
+    #log{margin-top:24px;padding:14px;height:140px;overflow-y:auto;background:#0a0a0a;border:1px solid #333;border-radius:10px;font-family:'Courier New',monospace;font-size:12px;color:#ff6666;white-space:pre-wrap;resize:vertical;box-shadow:inset 0 0 10px rgba(255,26,26,.2)}
+    @media(max-width:600px){.card{padding:20px}h2{font-size:22px}.row{flex-direction:column;align-items:stretch}#stopSpam,#leaveBtn{width:100%}}
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h2>RAIDER</h2>
+    <form id="form">
+      <label>トークン</label>
+      <textarea id="tokens" rows="4" placeholder="カンマ / 改行 / スペースで区切る"></textarea>
+      <label>サーバーID</label>
+      <input type="text" id="guildId" placeholder="123456789012345678">
+      <label>チャンネルID</label>
+      <textarea id="channelIds" rows="2" placeholder="カンマ / 改行 / スペースで区切る"></textarea>
+      <button type="button" id="autoFillChannels" class="secondary">チャンネル自動取得</button>
+      <label>メッセージ内容</label>
+      <textarea id="message" rows="4" placeholder="送信するメッセージを入力"></textarea>
+      <label class="checkbox-container">
+        <input type="checkbox" id="randomize">
+        <span>メッセージのランダマイズ</span>
+      </label>
+      <div class="row">
+        <label>送信間隔 (秒)<input type="number" id="delay" min="0" step="0.1" value="0"></label>
+        <label>送信上限 (回)<input type="number" id="limit" min="1" placeholder=""></label>
+      </div>
+      <details><summary>メンション設定</summary>
+        <div class="detail-content">
+          <label>メンションするユーザーID一覧</label>
+          <textarea id="mentionIds" rows="2"></textarea>
+          <button type="button" id="fetchMentions" class="secondary">メンション自動取得</button>
+        </div>
+      </details>
+      <details><summary>投票設定</summary>
+        <div class="detail-content">
+          <label>投票タイトル<input type="text" id="pollTitle"></label>
+          <label>投票選択肢（カンマ区切り）</label>
+          <textarea id="pollAnswers" rows="2"></textarea>
+        </div>
+      </details>
+      <details><summary>メッセージ転送設定</summary>
+        <div class="detail-content">
+          <label>転送するメッセージURL</label>
+          <input type="text" id="forwardMessageUrl" placeholder="https://discord.com/channels/...">
+        </div>
+      </details>
+      <button id="submitBtn" type="submit" class="primary" disabled>RAID START</button>
+    </form>
+    <div class="button-container">
+      <button id="stopSpam">即時停止</button>
+      <button id="leaveBtn">全トークン退出</button>
+    </div>
+    <div id="log"></div>
+  </div>
+  <script>
+    // 
+  </script>
+</body>
+</html>
